@@ -7,87 +7,60 @@
     <meta name="viewport" content="width=
     , initial-scale=1.0">
     <title>Weather Dashboard</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="Weather-Index/style.css">
+
 </head>
 
-<body>
-    <div>
+
+<body class="container">
+    <div class="row text-center bg-warning text-yellow">
         <h1>Weather Dashboard</h1>
     </div>
+    <div class="row">
+        <div class="column col-3">
+        <form> 
+            <label class="text-success">Search for City Here!</label>
+            <input class="text-success" type="search" placeholder="search here" id="citySearch">
 
-    
-    <aside>
-        <h1>Search for a City:</h1>
-        <input id="input1">
-        <button id="searchBtn"></button>
-        <button id="clearBtn"></button>
-        <div id="searchHistory"></div>
 
-    </aside>
-    <div>
-        <h1 id="city">city</h1>
-        <p id="icon1">Weather pic</p>
-        <p id="temp1">Temp:</p>
-        <p id="wind1">Wind:</p>
-        <p id="humid1">Humidity:</p>
-        <p id="uV1">UV Index:</p>
+
+
+
+
+
+
+        </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>       
+
+
+
+
+
+
 
 
     </div>
-    <div>
-        <h1 class="5Day">5 Day Forecast</h1>
-        <div>
-        <h3>Date</h3>
-        <p id="icon2">Weather pic</p>
-        <p id="temp2">Temp:</p>
-        <p id="wind2">Wind:</p>
-        <p id="humid2">Humidity:</p>
-        <p id="uV2">UV Index:</p>
-
-        </div>
-        <div>
-            <h3>Date</h3>
-            <p id="icon3">Weather pic</p>
-            <p id="temp3">Temp:</p>
-            <p id="wind3">Wind:</p>
-            <p id="humid3">Humidity:</p>
-            <p id="uV3">UV Index:</p>
-    
-
-
-
-        </div>
-        <div>
-            <h3>Date</h3>
-        <p id="icon4">Weather pic</p>
-        <p id="temp4">Temp:</p>
-        <p id="wind4">Wind:</p>
-        <p id="humid4">Humidity:</p>
-        <p id="uV4">UV Index:</p>
-
-
-
-        </div>
-        <div>
-            <h3>Date</h3>
-            <p id="icon5">Weather pic</p>
-            <p id="temp5">Temp:</p>
-            <p id="wind5">Wind:</p>
-            <p id="humid5">Humidity:</p>
-            <p id="uV5">UV Index:</p>
-    
-        </div>
-        <div>
-            <h3>Date</h3>
-        <p id="icon6">Weather pic</p>
-        <p id="temp6">Temp:</p>
-        <p id="wind6">Wind:</p>
-        <p id="humid6">Humidity:</p>
-        <p id="uV6">UV Index:</p>
-
-        </div>
-
-    </div>
-
 
 
 
@@ -125,5 +98,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="./script.js"></script>
 
 </html>

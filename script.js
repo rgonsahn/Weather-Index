@@ -1,13 +1,13 @@
 //two APIs I need to fetch- first current weather API gets latitude and longitude of city searched get lat and long 
 // place into second API called one call
 
-var myApiKey = "45ebbd33aab5c77a18994061b0a6ee6a";
+var myApiKey = "079955fb255c3ebb2910b2b976633cea";
 // var cities= [];
 var citySearchEl = $("#PlaceCityHere")
 var searchBtnEl = document.getElementById("searchBtn")
 var clearBtn = document.getElementById("clearSearchHistory");
 var CurrentWeatherIcon = document.getElementById("WeatherIconCurrent")
-var cityNameEl = $("#CityName")
+var cityNameEl = document.getElementById("CityName")
 var TempEl = document.getElementById("temp")
 var HumidityEl = document.getElementById("humidity")
 var UvEl = document.getElementById("UV-index")
@@ -18,7 +18,7 @@ var CurrentWeatherEl =$("#CurrentDaysWeather")
 // var LocalStorageHistory= JSON.parse(localStorage.getItem("search")) || [];
 // var presentCity; 
 
-
+// "45ebbd33aab5c77a18994061b0a6ee6a"
 // var formSubmitControl= function(event){
 //   event.preventDefault(); 
 //   var city=citySearchEl.value.trim();
@@ -61,8 +61,17 @@ function GetLatLon(city) {
     })
   .then(function(data){
     console.log(data)
+    const HtwoEl= document.createElement("h2")
     dailyWeather(data[0].lat, data[0].lon) 
-   
+   HtwoEl.textContent= data[0].name
+   FiveDayHeaderEl.appendChild(HtwoEl) 
+   var currentDate = new Date(response.data.dt[0] * 1000)
+   var day= currentDate.getDate() 
+   var month= currentDate.getMonth() + 1 
+   var year= currentDate.getFullYear(); 
+   cityNameEl.textContent= response.data.name + " (" + month + "/" + day + "/" + year + ") ";
+  
+    // inner text grabs data from API
   })
 
 
@@ -74,7 +83,6 @@ function GetLatLon(city) {
 
 
 // localWeather()
-
 
 
 
@@ -107,9 +115,8 @@ function dailyWeather(lat,lon) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data)
-
-
+      console.log(data) 
+      
 
 
     })

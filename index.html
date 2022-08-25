@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=
     , initial-scale=1.0">
     <title>Weather Dashboard</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
@@ -44,14 +43,17 @@
                     <!-- card m-3 had a d none which you removed for now -->
                     <div class="col-lg-11 card m-3" id="CurrentDaysWeather">
                         <div class="card-body">
-                            <h2 id="CityName" class="your-city-name align left"></h2>
+                            <h2 id="cityName" class="your-city-name align left"></h2>
                             <h3 id="stateName" class="align left"></h3>
-                            <p id="CurrentConditions" class="align left"></p>
-                            <img id="WeatherIconCurrent" alt="">
+                            <p id="date"></p>
+                            <div id="CurrentConditions" class="align left"></div>
+                            <div id="elements">
+                                <img id="WeatherIconCurrent" alt="">
                             <p id="temp"></p>
                             <p id="humidity"></p>
-                            <p id="wind-speed"></p>
-                            <p id="UV-index"></p>
+                            <div id="wind-speed"></div>
+                            <p id="UV-index"></p> 
+                        </div>
                         </div>
 
                     </div>
@@ -65,12 +67,8 @@
                     <h2 id="5DayHeader">5 Day Forecast</h2>
                 </div>
             </div>
-                    <div class="row" id="ImageIcon">
-                        <div class="col-lg-2 forecast bg-primary text-white m-2 rounded"></div>
-                        <div class="col-lg-2 forecast bg-primary text-white m-2 rounded"></div>
-                        <div class="col-lg-2 forecast bg-primary text-white m-2 rounded"></div>
-                        <div class="col-lg-2 forecast bg-primary text-white m-2 rounded"></div>
-                        <div class="col-lg-2 forecast bg-primary text-white m-2 rounded"></div>
+                    <div class="row" id="fiveDay">
+                        
                 </div>
             </div>
         </div>
@@ -133,6 +131,8 @@
 
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="./script.js"></script>
 

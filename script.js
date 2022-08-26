@@ -143,22 +143,22 @@ function dailyWeather(lat, lon, city, state) {
       const CurrentState = document.getElementById("stateName")
       CurrentState.textContent = state
       var TempEl = document.getElementById("temp")
-      var currentTemp = (data.current.temp);
-      TempEl.textContent = currentTemp;
-      var temperature=currentTemp;
+      var currentTemp = (data.current.temp) + "°F";
+      TempEl.textContent = currentTemp ;
+      var temperature = currentTemp;
       $('#temp').html(
         '<b>Current Temperature:</b>' + '<span class="badge-pill badge-light" id="temp">' + temperature + '</span>'
       )
       var windEl = document.getElementById("wind-speed")
-      var currentWind = (data.current.wind_speed)
+      var currentWind = (data.current.wind_speed) + "%"
       windEl.textContent = currentWind
-      var wind= currentWind
+      var wind = currentWind
       $('#wind-speed').html(
-        '<b>Wind Speed:</b>' + '<span class="badge-pill badge-light" id="wind-speed">' + wind + '</span>'
+        '<b>Wind Speed:</b>' + '<span class="badge-pill badge-light" id="wind-speed">' + currentWind + '</span>'
       )
       var HumidityEl = document.getElementById("humidity")
-      var currentHumidity = (data.current.humidity)
-      HumidityEl.textContent = currentHumidity
+      var currentHumidity = (data.current.humidity) + "%"
+      HumidityEl.textContent = currentHumidity 
       var humid = currentHumidity;
       $('#humidity').html(
         '<b>Humidity:</b>' + '<span class="badge-pill badge-light" id="humidity">' + humid + '</span>'
@@ -202,13 +202,25 @@ function dailyWeather(lat, lon, city, state) {
         var dailyIcon = document.createElement("img");
         var imgUrl = "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png"
         dailyIcon.setAttribute("src", imgUrl)
-        cardDiv.append(dailyIcon) 
-        var temp5Day= document.createElement("p")
-        var daily5Day= data.daily[i].temp.day;
-        temp5Day.textContent=daily5Day
+        cardDiv.append(dailyIcon)
+        var temp5Day = document.createElement("p")
+        var daily5Day = "Temperature:" + data.daily[i].temp.day + "°F";
+        temp5Day.textContent = daily5Day
+
         cardDiv.appendChild(temp5Day)
+        var wind5Day = document.createElement("p")
+        var dailyWind ="Wind-Speed:" + data.daily[i].wind_speed + "%" ; 
+        wind5Day.textContent = dailyWind
+        cardDiv.appendChild(wind5Day)
+        var humidity5Day = document.createElement("p")
+        var dailyhumid ="Humidity:" + data.daily[i].humidity + "%"
+        humidity5Day.textContent = dailyhumid
+        cardDiv.appendChild(humidity5Day)
+
+
 
         document.getElementById("fiveDay").appendChild(colDiv)
+
 
 
 

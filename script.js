@@ -2,7 +2,7 @@
 // place into second API called one call
 
 var myApiKey = "079955fb255c3ebb2910b2b976633cea";
-// var cities= [];
+
 var citySearchEl = $("#PlaceCityHere")
 var searchBtnEl = document.getElementById("searchBtn")
 var clearBtn = document.getElementById("clearSearchHistory");
@@ -34,12 +34,12 @@ var State = document.getElementById("stateName")
 //     alert("Please Enter A City");
 //   }
 //   // savedSearches() 
-//   // searchHistory()
+  // searchHistory()
 
 // } 
-// var searchHistory = function () {
-//   localStorage.setItem("cities", JSON.stringify(cities));
-// };
+var searchHistory = function () {
+  localStorage.setItem("cities", JSON.stringify(cities));
+};
 
 // var localWeather = function (city) {
 //   var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?q=Atlanta&units=imperial&appid=${myApiKey}`

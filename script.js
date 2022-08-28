@@ -235,8 +235,48 @@ searchBtnEl.addEventListener('click', function (event) {
 
 });
 
-function GetSearchHistory(){
-  var searchHistoryList = localStorage.getItem("CurrentDaysWeather");
+// function GetSearchHistory(){
+//   var searchHistoryList = localStorage.getItem("CurrentDaysWeather");
+//   if (searchHistoryList !== null) {
+//     freshList = JSON.parse(searchHistoryList);
+//     return freshList;
+//   } 
+//   else {
+//     freshList = [];
+//   } 
+//   return freshList;
+// }
+
+// function addSearchHistory(n) {
+//   var addToSearch = GetSearchHistory();
+//   if (historyList.includes(cityName) === false) { addToSearch.push(n) };
+//   localStorage.setItem("SearchHistory", JSON.stringify(addToSearch));
+
+// };
+// function displaySearchHistory(){
+//   var historyList=GetSearchHistory()
+//   for (var i = 0; i < historyList.length; i++) {
+//     var cityName= historyList[i]
+//     var historyEl = document.getElementById("SearchHistory")
+//     historyEl.attr('id',cityName) 
+//        historyEl.text(cityName) 
+//         historyEl.addClass("h4")
+//         $(".history").append(historyEl)
+// }
+// }
+// displaySearchHistory();
+
+$(".city").addClass("list-group")
+    $(".city").append(cityName)    
+    $(".city").append(momentDate)    
+    $(".city").append(CurrentWeatherIcon)    
+    $(".city").append(TempEl)    
+    $(".city").append(windEl)    
+    $(".city").append(humidity)    
+    $(".city").append(UvEl)
+    
+    function GetSearchHistory(){
+  var searchHistoryList = localStorage.getItem("city");
   if (searchHistoryList !== null) {
     freshList = JSON.parse(searchHistoryList);
     return freshList;
@@ -250,14 +290,14 @@ function GetSearchHistory(){
 function addSearchHistory(n) {
   var addToSearch = GetSearchHistory();
   if (historyList.includes(cityName) === false) { addToSearch.push(n) };
-  localStorage.setItem("SearchHistory", JSON.stringify(addToSearch));
+  localStorage.setItem(".city", JSON.stringify(addToSearch));
 
 };
 function displaySearchHistory(){
   var historyList=GetSearchHistory()
   for (var i = 0; i < historyList.length; i++) {
     var cityName= historyList[i]
-    var historyEl = document.getElementById("SearchHistory")
+    var displayHistory = $("<div>")
     historyEl.attr('id',cityName) 
        historyEl.text(cityName) 
         historyEl.addClass("h4")
@@ -265,3 +305,4 @@ function displaySearchHistory(){
 }
 }
 displaySearchHistory();
+    

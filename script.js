@@ -15,8 +15,8 @@ var windEl = document.querySelector("wind-speed")
 var historyEl = document.getElementById("SearchHistory")
 var FiveDayHeaderEl = document.getElementById("5DayForecastHeader")
 var CurrentWeatherEl = $("#CurrentDaysWeather")
-var currentWeatherConditions = document.getElementById("CurrentConditions")
-var State = document.getElementById("stateName")
+var currentWeatherConditions = document.getElemen
+var historyList = GetSearchHistory()
 // var LocalStorageHistory= JSON.parse(localStorage.getItem("search")) || [];
 // var presentCity; 
 
@@ -34,12 +34,12 @@ var State = document.getElementById("stateName")
 //     alert("Please Enter A City");
 //   }
 //   // savedSearches() 
-  // searchHistory()
+//   searchHistory()
 
-// } 
-var searchHistory = function () {
-  localStorage.setItem("cities", JSON.stringify(cities));
-};
+// // } 
+// var searchHistory = function () {
+//   localStorage.setItem("cities", JSON.stringify(cities));
+// };
 
 // var localWeather = function (city) {
 //   var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?q=Atlanta&units=imperial&appid=${myApiKey}`
@@ -144,7 +144,7 @@ function dailyWeather(lat, lon, city, state) {
       CurrentState.textContent = state
       var TempEl = document.getElementById("temp")
       var currentTemp = (data.current.temp) + "°F";
-      TempEl.textContent = currentTemp ;
+      TempEl.textContent = currentTemp;
       var temperature = currentTemp;
       $('#temp').html(
         '<b>Current Temperature:</b>' + '<span class="badge-pill badge-light" id="temp">' + temperature + '</span>'
@@ -158,7 +158,7 @@ function dailyWeather(lat, lon, city, state) {
       )
       var HumidityEl = document.getElementById("humidity")
       var currentHumidity = (data.current.humidity) + "%"
-      HumidityEl.textContent = currentHumidity 
+      HumidityEl.textContent = currentHumidity
       var humid = currentHumidity;
       $('#humidity').html(
         '<b>Humidity:</b>' + '<span class="badge-pill badge-light" id="humidity">' + humid + '</span>'
@@ -209,11 +209,11 @@ function dailyWeather(lat, lon, city, state) {
 
         cardDiv.appendChild(temp5Day)
         var wind5Day = document.createElement("p")
-        var dailyWind ="Wind-Speed:" + data.daily[i].wind_speed + "%" ; 
+        var dailyWind = "Wind-Speed:" + data.daily[i].wind_speed + "%";
         wind5Day.textContent = dailyWind
         cardDiv.appendChild(wind5Day)
         var humidity5Day = document.createElement("p")
-        var dailyhumid ="Humidity:" + data.daily[i].humidity + "%"
+        var dailyhumid = "Humidity:" + data.daily[i].humidity + "%"
         humidity5Day.textContent = dailyhumid
         cardDiv.appendChild(humidity5Day)
 
@@ -235,4 +235,21 @@ searchBtnEl.addEventListener('click', function (event) {
 
 });
 
+GetSearchHistory(){
+  var searchHistoryList = localStorage.getItem("CurrentDaysWeather");
+  if (searchHistoryList !== null) {
+    freshList = JSON.parse(searchHistoryList);
+    return freshList;
+  } 
+  else {
+    freshList = [];
+  } 
+  return freshList;
+}
 
+function addSearchHistory(n) {
+  var addToSearch = GetSearchHistory();
+  if (historyList.includes(cityName) === false) { addToSearch.push(n) };
+  localStorage.setItem("SearchHistory", JSON.stringify(addToSearch));
+
+};

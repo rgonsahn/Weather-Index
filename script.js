@@ -235,7 +235,7 @@ searchBtnEl.addEventListener('click', function (event) {
 
 });
 
-GetSearchHistory(){
+function GetSearchHistory(){
   var searchHistoryList = localStorage.getItem("CurrentDaysWeather");
   if (searchHistoryList !== null) {
     freshList = JSON.parse(searchHistoryList);
@@ -253,3 +253,15 @@ function addSearchHistory(n) {
   localStorage.setItem("SearchHistory", JSON.stringify(addToSearch));
 
 };
+function displaySearchHistory(){
+  var historyList=GetSearchHistory()
+  for (var i = 0; i < historyList.length; i++) {
+    var cityName= historyList[i]
+    var historyEl = document.getElementById("SearchHistory")
+    historyEl.attr('id',cityName) 
+       historyEl.text(cityName) 
+        historyEl.addClass("h4")
+        $(".history").append(historyEl)
+}
+}
+displaySearchHistory();

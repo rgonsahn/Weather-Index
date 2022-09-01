@@ -13,11 +13,12 @@ var HumidityEl = document.getElementById("humidity")
 var UvEl = document.getElementById("UV-index")
 var windEl = document.querySelector("wind-speed")
 var FiveDayHeaderEl = document.getElementById("5DayForecastHeader")
-var CurrentWeatherEl = $("#CurrentDaysWeather")
-var currentWeatherConditions = document.getElemen
-var historyList = GetSearchHistory()
+// var CurrentWeatherEl = $("#CurrentDaysWeather")
+var currentWeatherConditions = document.getElementById("CurrentDaysWeather")
+var addToSearch = JSON.parse(localStorage.getItem("city")) || []
+// var historyList = GetSearchHistory()
 
-
+console.log(addToSearch)
 
 function GetLatLon(city) {
   var geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${myApiKey}`
@@ -34,10 +35,10 @@ function GetLatLon(city) {
       dailyWeather(data[0].lat, data[0].lon, name, state)
 
 
-     
+
     })
 
- 
+
 }
 
 function dailyWeather(lat, lon, city, state) {
@@ -50,9 +51,8 @@ function dailyWeather(lat, lon, city, state) {
     })
     .then(function (data) {
       console.log(data)
-      
-      addSearchHistory(city) 
-      
+
+
 
       const HtwoEl = document.getElementById("cityName")
       var imageIcon = document.createElement("img");
@@ -110,17 +110,17 @@ function dailyWeather(lat, lon, city, state) {
       } else {
         $('#UV-index').css('background-color', 'purple');
       }
-
+      document.getElementById("fiveDay").innerHTML = ""
       for (var i = 0; i < 5; i++) {
         var dailyMomentDt = moment.unix(data.daily[i].dt).format("L");
-        
+
         var colDiv = document.createElement("div")
         colDiv.setAttribute("class", "col-lg-2 forecast bg-primary m-2 rounded")
         var cardDiv = document.createElement("div")
         cardDiv.setAttribute("class", "card")
         colDiv.appendChild(cardDiv)
         var dailyDate = document.createElement("p")
-        
+
         dailyDate.textContent = dailyMomentDt
         cardDiv.appendChild(dailyDate)
         var dailyIcon = document.createElement("img");
@@ -162,56 +162,32 @@ searchBtnEl.addEventListener('click', function (event) {
 
 
 
-$(".city").addClass("list-group")
-    $(".city").append(cityName)    
-    $(".city").append(momentDate)    
-    $(".city").append(CurrentWeatherIcon)    
-    $(".city").append(TempEl)    
-    $(".city").append(windEl)    
-    $(".city").append(humidity)    
-    $(".city").append(UvEl)
-    
-    function GetSearchHistory(){
-  var searchHistoryList = localStorage.getItem("city");
-  if (searchHistoryList !== null) {
-    newList = JSON.parse(searchHistoryList);
-    return newList;
-  } 
-  else {
-    newList = [];
-  } 
-  return newList;
-}
 
-function addSearchHistory(n) {
-  var addToSearch = JSON.parse(localStorage.getItem("city"))|| []
+
+function addSearchHistory(yourSearchHistory) {
+  
   var historySearchesEl = document.getElementById('history');
-  historySearchesEl.innerHTML='';
-  if (historyList.includes(cityName) === false) { addToSearch.push(n) };
-  localStorage.setItem("city", JSON.stringify(addToSearch));
-  for (i = 0; i < addToSearch.length; i++) {
-        
-    var pastCityBtn = document.createElement("button");
-    pastCityBtn.classList.add("btn", "btn-warning", "my-2", "past-city");
-    pastCityBtn.setAttribute("style", "width: 100%");
-    pastCityBtn.textContent = `${addToSearch[i].city}`;
-    historySearchesEl.appendChild(pastCityBtn);
+  historySearchesEl.innerHTML = '';
+  if (addToSearch.includes(yourSearchHistory) === false) {
+    addToSearch.push(yourSearchHistory)
+    localStorage.setItem("city", JSON.stringify(addToSearch));
+
+  };
+  
+    //   for (i = 0; i < addToSearch.length; i++) {
+
+    //     var pastCityBtn = document.createElement("button");
+    //     pastCityBtn.classList.add("btn", "btn-warning", "my-2", "past-city");
+    //     pastCityBtn.setAttribute("style", "width: 100%");
+    //     pastCityBtn.textContent = `${addToSearch[i]}`;
+    //     historySearchesEl.appendChild(pastCityBtn);
+    // }
+  
+
+
 }
-return;
-}
-
-
-
-// // function displaySearchHistory(){
-// //   var historyList=GetSearchHistory()
-// //   for (var i = 0; i < historyList.length; i++) {
-// //     var cityName= historyList[i]
-// //     var historyEl = $("<div>")
-// //     historyEl.attr('id',cityName) 
-// //        historyEl.text(cityName) 
-// //         historyEl.addClass("h4")
-// //         $("history").append(historyEl)
-// // }
-// }
-displaySearchHistory();
-    
+// addSearchHistory(yourSearchHistory) 
+for (var i = 0; i < addToSearch.length; i++) {
+  addSearchHistory(addToSearch[i])
+  // console.log(addToSearch[0])
+} 

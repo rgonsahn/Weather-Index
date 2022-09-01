@@ -17,7 +17,7 @@ var FiveDayHeaderEl = document.getElementById("5DayForecastHeader")
 var currentWeatherConditions = document.getElementById("CurrentDaysWeather")
 var addToSearch = JSON.parse(localStorage.getItem("city")) || []
 // var historyList = GetSearchHistory()
-
+localStorage.setItem("city", JSON.stringify(addToSearch));
 console.log(addToSearch)
 
 function GetLatLon(city) {
@@ -156,6 +156,7 @@ function dailyWeather(lat, lon, city, state) {
 searchBtnEl.addEventListener('click', function (event) {
   var cityName = citySearchEl.val().trim()
   GetLatLon(cityName)
+  localStorage.setItem("city", JSON.stringify(addToSearch));
 
 });
 
@@ -164,13 +165,14 @@ searchBtnEl.addEventListener('click', function (event) {
 
 
 
+
 function addSearchHistory(yourSearchHistory) {
-  
+  var addToSearch = JSON.parse(localStorage.getItem("city")) || []
   var historySearchesEl = document.getElementById('history');
   historySearchesEl.innerHTML = '';
   if (addToSearch.includes(yourSearchHistory) === false) {
     addToSearch.push(yourSearchHistory)
-    localStorage.setItem("city", JSON.stringify(addToSearch));
+  // localStorage.setItem("city", JSON.stringify(addToSearch));
 
   };
   
@@ -188,6 +190,9 @@ function addSearchHistory(yourSearchHistory) {
 }
 // addSearchHistory(yourSearchHistory) 
 for (var i = 0; i < addToSearch.length; i++) {
-  addSearchHistory(addToSearch[i])
+  addSearchHistory(addToSearch[i]);
   // console.log(addToSearch[0])
+
+console.log(addSearchHistory)
 } 
+

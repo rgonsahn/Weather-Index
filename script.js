@@ -14,6 +14,7 @@ var windEl = document.querySelector("wind-speed")
 var FiveDayHeaderEl = document.getElementById("5DayForecastHeader")
 // var CurrentWeatherEl = $("#CurrentDaysWeather")
 var currentWeatherConditions = document.getElementById("CurrentDaysWeather")
+var pastCityBtn = document.createElement("button");
 var addToSearch = JSON.parse(localStorage.getItem("city")) || []
 // var historyList = GetSearchHistory()
 localStorage.setItem("city", JSON.stringify(addToSearch));
@@ -138,7 +139,7 @@ searchBtnEl.addEventListener('click', function (event) {
   //Get search history and store in array
   var storedHistory = JSON.parse(localStorage.getItem('city'));
   //Add city to array and append to array
-  storedHistory.push(cityName)
+  storedHistory.push(cityName);
   //store item in localstorege
   localStorage.setItem("city", JSON.stringify(storedHistory));
 });
@@ -175,28 +176,30 @@ historySearchesEl.innerHTML='';
 return;
 }
 
-function clearHistory (){
-  currentWeatherConditions.innerHTML='';
-  fiveDayHeaderEl.innerHTML='';
-  cardDiv.innerHTML='';
-  return;
+// function clearHistory (){
+//   currentWeatherConditions.innerHTML='';
+//   fiveDayHeaderEl.innerHTML='';
+//   cardDiv.innerHTML='';
+//   return;
 
-}
+// }
 
-function submitForm(event){
-  event.preventDefault();
-  cityName; 
-  clearHistory()
-  return;
+// function submitForm(event){
+//   event.preventDefault();
+//   cityName; 
+//   clearHistory()
+//   return;
 
-}
+// }
 
 function restoreSearch (event) {
   var cityEl= event.target; 
   if(cityEl.matches(".past-city")){
-    cityName=city.textContent;
+    cityName=cityEl.textContent;
+    GetLatLon(city)
   }
-clearHistory() 
+
 }
-addSearchHistory();
-clearBtn.on("click",clearSearchHistory);
+
+clearBtn.addEventListener('click',clearSearchHistory);
+pastCityBtn.addEventListener('click',restoreSearch);

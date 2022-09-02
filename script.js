@@ -164,7 +164,7 @@ function addSearchHistory(yourSearchHistory) {
 
 for (var i = 0; i < addToSearch.length; i++) {
   addSearchHistory(addToSearch[i]);
-  // console.log(addToSearch[0])
+  console.log(addToSearch[0])
   console.log(addSearchHistory)
 } 
 
@@ -202,4 +202,14 @@ function restoreSearch (event) {
 }
 
 clearBtn.addEventListener('click',clearSearchHistory);
-pastCityBtn.addEventListener('click',restoreSearch);
+pastCityBtn.addEventListener('click',function(event){
+  var addSearch = addToSearch[0].val().trim()
+  GetLatLon(event)
+  
+var storedHistory = JSON.parse(localStorage.getItem('city'));
+  //Add city to array and append to array
+  storedHistory.push(addSearch);
+  //store item in localstorege
+  localStorage.setItem("city", JSON.stringify(storedHistory));
+
+});

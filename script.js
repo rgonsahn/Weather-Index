@@ -42,7 +42,8 @@ function dailyWeather(lat, lon, city, state) {
       })
       .then(function (data) {
         console.log(data)
-        const HtwoEl = document.getElementById("cityName")
+        const HtwoEl = document.getElementById("cityName") 
+        console.log(HtwoEl)
         var imageIcon = document.createElement("img");
         var iconUrl = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png"
         imageIcon.setAttribute("src", iconUrl)
@@ -133,6 +134,7 @@ function dailyWeather(lat, lon, city, state) {
 searchBtnEl.addEventListener('click', function (event) {
   var cityName = citySearchEl.val().trim()
   GetLatLon(cityName)
+  
   //Get search history and store in array
   var storedHistory = JSON.parse(localStorage.getItem('city'));
   //Add city to array and append to array
@@ -151,7 +153,7 @@ function addSearchHistory(yourSearchHistory) {
 
   for (i = 0; i < addToSearch.length; i++) {
     var pastCityBtn = document.createElement("button");
-    pastCityBtn.classList.add("btn", "btn-warning", "my-2");
+    pastCityBtn.classList.add("btn", "btn-warning", "my-2" ,"past-city");
     pastCityBtn.setAttribute("style", "width: 100%");
     pastCityBtn.textContent =`${addToSearch[i]}`;
     historySearchesEl.appendChild(pastCityBtn);
@@ -163,4 +165,38 @@ for (var i = 0; i < addToSearch.length; i++) {
   addSearchHistory(addToSearch[i]);
   // console.log(addToSearch[0])
   console.log(addSearchHistory)
+} 
+
+function clearSearchHistory(event){
+  event.preventDefault()
+  var historySearchesEl = document.getElementById('history');
+localStorage.removeItem('city');
+historySearchesEl.innerHTML='';
+return;
 }
+
+function clearHistory (){
+  currentWeatherConditions.innerHTML='';
+  fiveDayHeaderEl.innerHTML='';
+  cardDiv.innerHTML='';
+  return;
+
+}
+
+function submitForm(event){
+  event.preventDefault();
+  cityName; 
+  clearHistory()
+  return;
+
+}
+
+function restoreSearch (event) {
+  var cityEl= event.target; 
+  if(cityEl.matches(".past-city")){
+    cityName=city.textContent;
+  }
+clearHistory() 
+}
+addSearchHistory();
+clearBtn.on("click",clearSearchHistory);

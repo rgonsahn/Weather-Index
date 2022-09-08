@@ -12,4 +12,4 @@ Simply follow the Url link provided below and open in the browser(chrome preferr
 * Past search history buttons 
 
 # Example
-![Weather-Dashboard](Weather-Index/images/weatherDash.png)
+![Weather-Dashboard](./images/weatherDash.png)

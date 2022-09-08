@@ -1,6 +1,3 @@
-//two APIs I need to fetch- first current weather API gets latitude and longitude of city searched get lat and long 
-// place into second API called one call
-
 var myApiKey = "079955fb255c3ebb2910b2b976633cea";
 var citySearchEl = $("#PlaceCityHere")
 var searchBtnEl = document.getElementById("searchBtn")
@@ -12,11 +9,10 @@ var HumidityEl = document.getElementById("humidity")
 var UvEl = document.getElementById("UV-index")
 var windEl = document.querySelector("wind-speed")
 var FiveDayHeaderEl = document.getElementById("5DayForecastHeader")
-// var CurrentWeatherEl = $("#CurrentDaysWeather")
 var currentWeatherConditions = document.getElementById("CurrentDaysWeather")
 var pastCityBtn = document.createElement("button");
 var addToSearch = JSON.parse(localStorage.getItem("city")) || []
-// var historyList = GetSearchHistory()
+var historyContainer = document.getElementById("history")
 localStorage.setItem("city", JSON.stringify(addToSearch));
 console.log(addToSearch)
 
@@ -53,7 +49,6 @@ function dailyWeather(lat, lon, city, state) {
         var currentDate = document.getElementById("date")
         var momentDate = moment(data.dt).format('MMMM Do YYYY')
         currentDate.textContent = momentDate
-        // currentWeatherConditions.append(currentDate)
         console.log(momentDate, currentDate)
         const CurrentState = document.getElementById("stateName")
         CurrentState.textContent = state
@@ -78,6 +73,7 @@ function dailyWeather(lat, lon, city, state) {
         $('#humidity').html(
           '<b>Humidity:</b>' + '<span class="badge-pill badge-light" id="humidity">' + humid + '</span>'
         )
+        // UV index color-coded
         var UvEl = document.getElementById("UV-index")
         var currentUvi = (data.current.uvi)
         UvEl.textContent = currentUvi
@@ -100,11 +96,12 @@ function dailyWeather(lat, lon, city, state) {
         } else {
           $('#UV-index').css('background-color', 'purple');
         }
+        // Creates 5-Day weather cards and input
         document.getElementById("fiveDay").innerHTML = ""
         for (var i = 0; i < 5; i++) {
           var dailyMomentDt = moment.unix(data.daily[i].dt).format("L");
           var colDiv = document.createElement("div")
-          colDiv.setAttribute("class", "col-lg-2 forecast bg-primary m-2 rounded")
+          colDiv.setAttribute("class", "col-lg-2 forecast bg-success m-2 rounded")
           var cardDiv = document.createElement("div")
           cardDiv.setAttribute("class", "card")
           colDiv.appendChild(cardDiv)
@@ -145,15 +142,22 @@ searchBtnEl.addEventListener('click', function (event) {
 });
 function addSearchHistory(yourSearchHistory) {
   var addToSearch = JSON.parse(localStorage.getItem("city")) || []
+  
   var historySearchesEl = document.getElementById('history');
   historySearchesEl.innerHTML = '';
   if (addToSearch.includes(yourSearchHistory) === false) {
     addToSearch.push(yourSearchHistory)
     // localStorage.setItem("city", JSON.stringify(addToSearch));
   };
-
+var searchHistory = function(){
+  if(addToSearch.length > 0){
+    historySearchesEl.innerHTML=""
+  }
+}
+// Creates the past search history list and buttons
   for (i = 0; i < addToSearch.length; i++) {
     var pastCityBtn = document.createElement("button");
+    var historySearchesEl=document.getElementById('history')
     pastCityBtn.classList.add("btn", "btn-warning", "my-2" ,"past-city");
     pastCityBtn.setAttribute("style", "width: 100%");
     pastCityBtn.textContent =`${addToSearch[i]}`;
@@ -167,7 +171,16 @@ for (var i = 0; i < addToSearch.length; i++) {
   console.log(addToSearch[0])
   console.log(addSearchHistory)
 } 
-
+// When I click on the past search history button, I am then returned to that previous city's weather
+function searchHistory(e) {
+  console.log('history click')
+  var btn = e.target;
+  var search = btn.textContent
+  console.log(search)
+  GetLatLon(search)
+}
+historyContainer.addEventListener('click', searchHistory);
+// clears search history list from local storage
 function clearSearchHistory(event){
   event.preventDefault()
   var historySearchesEl = document.getElementById('history');
@@ -176,40 +189,5 @@ historySearchesEl.innerHTML='';
 return;
 }
 
-// function clearHistory (){
-//   currentWeatherConditions.innerHTML='';
-//   fiveDayHeaderEl.innerHTML='';
-//   cardDiv.innerHTML='';
-//   return;
-
-// }
-
-// function submitForm(event){
-//   event.preventDefault();
-//   cityName; 
-//   clearHistory()
-//   return;
-
-// }
-
-function restoreSearch (event) {
-  var cityEl= event.target; 
-  if(cityEl.matches(".past-city")){
-    cityName=cityEl.textContent;
-    GetLatLon(city)
-  }
-
-}
 
 clearBtn.addEventListener('click',clearSearchHistory);
-pastCityBtn.addEventListener('click',function(event){
-  var addSearch = addToSearch[0].val().trim()
-  GetLatLon(event)
-  
-var storedHistory = JSON.parse(localStorage.getItem('city'));
-  //Add city to array and append to array
-  storedHistory.push(addSearch);
-  //store item in localstorege
-  localStorage.setItem("city", JSON.stringify(storedHistory));
-
-});

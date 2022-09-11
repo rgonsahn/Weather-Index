@@ -4,8 +4,7 @@ Have you ever wondered what the weather is like in your favorite city? Perhaps y
 
 ## Installation
 Simply follow the Url link provided below and open in the browser(chrome preferred). Type in the city of your choice. The API call is set to capture the results of the 1st city in the fetch. Refresh the page to see a list of previous searched cities (orange buttons on the right of page). The buttons with the city names can be clicked to return to the past results. Click on the clear history button to delete these results. 
-[website](https://rgonsahn.github.io/Weather-Index/Assets/)
-
+[website](https://rgonsahn.github.io/Weather-Index/)
 ## Features
 * Clear History button
 * Interactive/color-coded UV-index 

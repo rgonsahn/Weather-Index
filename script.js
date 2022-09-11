@@ -17,7 +17,7 @@ localStorage.setItem("city", JSON.stringify(addToSearch));
 console.log(addToSearch)
 
 function GetLatLon(city) {
-  var geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${myApiKey}`
+  var geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${myApiKey}`
     fetch(geoUrl)
       .then(function (response) {
         console.log(response);
